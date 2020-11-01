@@ -18,6 +18,6 @@ type User struct {
 func GetUsers(c echo.Context) error {
 	db := db.GormConnect()
 
-	result := db.First(&User{})
+	result := db.Find(&[]User{})
 	return c.JSON(http.StatusOK, result)
 }
