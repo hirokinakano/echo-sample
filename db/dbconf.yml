@@ -1,0 +1,4 @@
+# TODO:環境変数からの読み込みと各環境の接続情報の設定
+development:
+  driver: mymysql
+  open: tcp:localhost:3306*echo_development/root/root
