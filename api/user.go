@@ -1,16 +1,23 @@
 package api
 
 import (
+	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/labstack/echo"
 	"net/http"
+
+	"echo-sample/db"
 )
 
-//func GetUsers() echo.HandlerFunc {
-//	return func(c echo.Context) (err error) {
-//		return c.String(http.StatusOK, "Hello, World!")
-//	}
-//}
+type User struct {
+	gorm.Model
+	Name  string `json:"name"`
+	Email string `json:"email"`
+}
 
 func GetUsers(c echo.Context) error {
-	return c.String(http.StatusOK, "Hello world")
+	db := db.GormConnect()
+
+	result := db.First(&User{})
+	return c.JSON(http.StatusOK, result)
 }
